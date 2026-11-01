@@ -1,0 +1,6 @@
+{
+  "appId": "com.nicogomez.quehacemos",
+  "appName": "¿Qué Hacemos?",
+  "webDir": "www",
+  "bundledWebRuntime": false
+}

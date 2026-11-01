@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>¿Qué Hacemos?</title>
+<style>
+:root{--bg:#14102B;--bg2:#1F1947;--card:#2A2260;--tx:#F6F3FF;--mu:#A9A2D6;--co:#FF5C7A;--li:#C6FF3D;--sk:#4CC9F0;--pri:#C6FF3D;--pt:#14102B;--g1:#3b2f8f;--g2:#6a1b4d;--fh:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;color-scheme:dark}
+:root[data-mode=imp]{--bg:#121212;--bg2:#1c1c1f;--card:#26262b;--tx:#F5F3F7;--mu:#A5A1AD;--co:#C1121F;--li:#C084FC;--pri:#6B21A8;--pt:#fff;--g1:#3a1466;--g2:#2a0a0f;--fh:'Arial Black','Segoe UI Black',Impact,system-ui,sans-serif}
+:root[data-mode=who]{--bg:#0F172A;--bg2:#162036;--card:#1E293B;--tx:#F1F5F9;--mu:#94A3B8;--co:#F43F5E;--li:#7DD3FC;--pri:#2563EB;--pt:#fff;--g1:#1e3a8a;--g2:#0b3b4a;--fh:ui-rounded,'SF Pro Rounded',Nunito,Quicksand,'Segoe UI',system-ui,sans-serif}
+:root[data-mode=rel]{--bg:#0B0C10;--bg2:#15171e;--card:#1c1f29;--tx:#F8FAFC;--mu:#9AA3B2;--co:#EF2B2B;--li:#34D399;--pri:#10B981;--pt:#04130d;--g1:#064e3b;--g2:#3b0a0a;--fh:'Arial Black','Segoe UI Black',Impact,system-ui,sans-serif}
+h1,h2,.btn,.tile b,.rb{font-family:var(--fh)}
+
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+body{background:radial-gradient(circle at 20% -10%,var(--g1) 0,transparent 55%),radial-gradient(circle at 100% 100%,var(--g2) 0,transparent 50%),var(--bg);background-attachment:fixed}
+#app{max-width:480px;margin:0 auto;min-height:100vh;padding:calc(18px + env(safe-area-inset-top,0px)) 18px calc(84px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:14px}
+#ad-banner{position:fixed;left:0;right:0;bottom:0;height:calc(60px + env(safe-area-inset-bottom,0px));padding-bottom:env(safe-area-inset-bottom,0px);display:flex;align-items:center;justify-content:center;background:#0d0a20;border-top:1px dashed #4a4290;color:#6f68a8;font-size:12px;z-index:5}
+#mute{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));right:12px;width:42px;height:42px;border:0;border-radius:14px;background:var(--card);font-size:20px;z-index:10;cursor:pointer;color:var(--tx)}
+h1,h2,h3,p{margin:0}
+h1{font-size:46px;line-height:.95;font-weight:800;letter-spacing:-1.5px}
+h2{font-size:27px;font-weight:800;letter-spacing:-.5px}
+.mu{color:var(--mu);font-size:15px}
+.top{display:flex;align-items:center;gap:10px;min-height:42px;padding-right:108px}
+.top.pl{padding-left:52px}
+.back{border:0;background:var(--card);color:var(--tx);width:42px;height:42px;border-radius:14px;font-size:18px;cursor:pointer}
+.btn{border:0;border-radius:20px;padding:16px 20px;font:inherit;font-weight:700;font-size:17px;cursor:pointer;color:var(--pt);background:var(--pri);transition:transform .08s;width:100%;min-height:60px}
+.btn:active{transform:scale(.96)}
+.btn.co{background:var(--co);color:#fff}.btn.sk{background:var(--sk);color:#0b1020}.btn.gold{background:#F59E0B;color:#1a1200}.btn.gh{background:var(--card);color:var(--tx)}
+.btn[disabled]{opacity:.35;pointer-events:none}
+.tile{display:flex;align-items:center;gap:14px;text-align:left;background:var(--card);border:2px solid transparent;border-radius:24px;padding:16px;color:var(--tx);font:inherit;cursor:pointer;width:100%;transition:transform .12s}
+.tile:active{transform:scale(.97)}
+.tile .ic{font-size:36px;width:60px;height:60px;border-radius:20px;display:grid;place-items:center;flex:none}
+.tile b{font-size:18px;display:block}.tile .s{color:var(--mu);font-size:14px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cat{flex-direction:column;align-items:flex-start;gap:10px}
+.step{display:flex;align-items:center;justify-content:space-between;background:var(--card);border-radius:22px;padding:12px 14px}
+.step button{border:0;width:46px;height:46px;border-radius:14px;background:var(--bg2);color:var(--tx);font-size:24px;font-weight:700;cursor:pointer}
+.step b{font-size:30px}
+.seg{display:flex;gap:8px}.seg button{flex:1;border:0;padding:12px;border-radius:16px;font:inherit;font-weight:700;font-size:17px;background:var(--card);color:var(--tx);cursor:pointer}.seg button.on{background:var(--pri);color:var(--pt)}
+.center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center}
+.card{width:100%;max-width:300px;aspect-ratio:3/4.1;border-radius:30px;display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px;text-align:center;box-shadow:0 20px 50px #0008}
+.avw{flex:1;min-height:0;width:100%;display:flex;align-items:center;justify-content:center}
+.avw img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;filter:drop-shadow(0 8px 10px #0005);pointer-events:none}.fb{font-size:96px;line-height:1;filter:drop-shadow(0 6px 8px #0004)}.mini .fb{font-size:58px}
+.card h3{background:#0007;border-radius:16px;padding:8px 14px;font-size:26px;font-weight:800;line-height:1.1;width:100%}
+.avw{background:radial-gradient(circle at 50% 38%,#ffffffee,#ffffff66 55%,#ffffff22);border-radius:22px;box-shadow:inset 0 0 0 1.5px #ffffff55;padding:10px}
+
+.flip{perspective:900px;cursor:pointer;width:100%}
+.flip .in{position:relative;width:100%;aspect-ratio:3/4.1;transition:transform .6s;transform-style:preserve-3d}
+.flip.on .in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.face .card{max-width:none;width:100%;height:100%;aspect-ratio:auto}
+.rev{transform:rotateY(180deg)}
+.flip:focus-visible{outline:3px solid var(--li);outline-offset:4px;border-radius:22px}
+.nrow{display:flex;gap:8px;align-items:center}
+.nrow input{flex:1;min-width:0;background:var(--card);border:2px solid transparent;border-radius:16px;padding:13px 14px;color:var(--tx);font:inherit;font-size:17px;user-select:text;-webkit-user-select:text}
+.nrow input:focus{outline:none;border-color:var(--li)}
+.sel{flex:1;min-width:0;background:var(--card);color:var(--tx);border:0;border-radius:16px;padding:13px;font:inherit;font-size:16px}
+.olist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.olist li{background:var(--card);border-radius:18px;padding:14px 16px;font-size:20px;font-weight:700;display:flex;gap:12px;align-items:center}
+.olist b{color:var(--li);min-width:36px}
+.grow{display:flex;gap:12px;align-items:center;background:var(--card);border-radius:20px;padding:10px}
+.gth{width:64px;height:64px;flex:none;background:radial-gradient(circle,#fff,#ffffff44);border-radius:16px;display:grid;place-items:center;padding:4px}
+.gth img{max-width:100%;max-height:100%;object-fit:contain}.gth .fb{font-size:34px}
+.gin{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+.gbt{display:flex;gap:6px;flex-wrap:wrap}
+.gb{border:0;background:var(--bg2);color:var(--tx);border-radius:12px;padding:8px 10px;font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+.gu{flex:1 1 120px;min-width:0;background:var(--bg2);border:0;border-radius:12px;padding:8px 10px;color:var(--tx);font:inherit;font-size:13px;user-select:text;-webkit-user-select:text}
+.tcard{background:linear-gradient(160deg,hsl(var(--h) 45% 17%),hsl(var(--h) 55% 7%));padding:12px;justify-content:center}
+.frame{width:100%;height:100%;border:2px solid #e9c46a;border-radius:20px;box-shadow:inset 0 0 0 6px transparent,inset 0 0 0 7px #e9c46a66;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:16px 12px;color:#f6efdc}
+.orn{color:#e9c46a;font-size:13px;letter-spacing:3px}
+.tc{font-size:12px;color:#e9c46acc;letter-spacing:1.5px}
+.card h3.tn{background:none;padding:0;font-family:Georgia,'Times New Roman',serif;font-size:32px;font-weight:700;letter-spacing:.3px;color:#fff;text-wrap:balance}
+.tl{font-size:12px;color:#e9c46a;font-style:italic;font-family:Georgia,serif;margin-top:4px}
+.tp{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:13px;line-height:1.25;color:#f6efdc}
+.tp li{border-top:1px solid #e9c46a44;padding-top:6px}
+.mini .frame{padding:8px 6px;gap:5px}.mini .tc,.mini .tl{font-size:10px}.mini .tp{font-size:10.5px;gap:4px}.mini .tp li{padding-top:4px}.mini .orn{font-size:10px}
+.card h3.tn{overflow-wrap:anywhere}.mini h3.tn{font-size:19px}
+.tl.bad{color:#ff8a8a}
+.tb{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.tb li{background:#c1121f;color:#fff;border-radius:99px;padding:4px 11px;font-size:13px;font-weight:700}
+.fx{width:100%;background:#0006;border-radius:14px;padding:7px 9px;display:flex;flex-direction:column;gap:4px}
+.fx .tl{color:#fff;margin:0;font-style:normal;font-size:11px}.fx .tl.bad{color:#ffd0d0}
+.fx .tp{font-size:12px;color:#fff;gap:3px}.fx .tp li{border-top-color:#fff3;padding-top:3px}
+.mini .tb li{font-size:10px;padding:3px 7px}.mini .tb{gap:4px}.mini .fx{padding:5px 6px}.mini .fx .tp{font-size:10px}
+.hint{width:100%;background:#0006;border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:4px}
+.hint p{font-size:12px;color:#ffd0d8}.hint b{font-size:22px;line-height:1.15}
+.goal{background:var(--card);border-radius:28px;padding:24px 20px;display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center;max-width:340px}
+.goal p{line-height:1.45;font-size:16px;color:var(--tx)}
+.modal{position:fixed;inset:0;z-index:20;background:#000a;display:flex;align-items:flex-end;justify-content:center}
+.modal[hidden]{display:none}
+.sheet{width:100%;max-width:480px;max-height:88vh;overflow:auto;background:var(--bg2);border-radius:28px 28px 0 0;padding:20px 18px calc(24px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:12px}
+.hw{background:var(--card);border-radius:18px;padding:12px 14px}.hw b{display:block;margin-bottom:4px}.hw p{font-size:14px;line-height:1.4;color:var(--mu)}
+#help{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));right:62px;width:42px;height:42px;border:0;border-radius:14px;background:var(--card);font-size:19px;z-index:10;cursor:pointer;color:var(--tx)}
+.sec{font-size:20px;font-weight:800;margin:6px 0 0}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chk .box{margin-left:auto;width:30px;height:30px;border-radius:10px;border:2px solid var(--mu);display:grid;place-items:center;font-weight:800;color:#14102B;flex:none}
+.chk.on{border-color:var(--li)}.chk.on .box{background:var(--li);border-color:var(--li)}
+#exit{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:12px;width:42px;height:42px;border:0;border-radius:14px;background:var(--card);font-size:22px;font-weight:800;z-index:10;cursor:pointer;color:var(--tx)}
+#exit[hidden]{display:none}
+.sch{width:100%;background:var(--card);border:2px solid transparent;border-radius:16px;padding:13px 14px;color:var(--tx);font:inherit;font-size:17px;user-select:text;-webkit-user-select:text}
+.sch:focus{outline:none;border-color:var(--li)}
+.lst{display:flex;flex-direction:column;gap:8px}
+#peek{position:fixed;inset:0;z-index:15;background:#000d;display:flex;align-items:center;justify-content:center;pointer-events:none}
+#peek[hidden]{display:none}
+.pkb{touch-action:none;-webkit-touch-callout:none}
+#rt{position:fixed;inset:0;z-index:16;background:var(--bg);display:grid;grid-template-columns:20% 1fr 20%;grid-template-rows:auto 1fr;gap:10px;padding:calc(10px + env(safe-area-inset-top,0px)) calc(10px + env(safe-area-inset-right,0px)) 10px calc(10px + env(safe-area-inset-left,0px))}
+@media (orientation:portrait){#rt{inset:auto;top:0;left:0;width:100vh;width:100dvh;height:100vw;height:100dvw;transform-origin:0 0;transform:translateX(100vw) rotate(90deg);transform:translateX(100dvw) rotate(90deg)}}
+.rh{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.rh .pill{font-size:20px}
+.rx{border:0;background:var(--card);color:var(--tx);width:42px;height:42px;border-radius:14px;font-size:22px;font-weight:800;cursor:pointer}
+.rb{border:0;border-radius:24px;font:inherit;font-weight:800;font-size:20px;line-height:1.3;color:#fff;cursor:pointer}
+.rb.no{background:#ef2b2b}.rb.ok{background:#0fbf7a}.rb:active{filter:brightness(1.2)}
+.rc{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;min-width:0}
+#rname{font-weight:900;font-family:var(--fh);line-height:1.05;overflow-wrap:anywhere;letter-spacing:-.5px}
+.rref{font-size:clamp(15px,3.2vh,24px);font-weight:700;color:var(--mu)}
+.rp,.rtb{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.rp li{background:var(--card);border-radius:12px;padding:6px 12px;font-size:16px;color:var(--mu)}
+.rtb li{background:#c1121f;color:#fff;border-radius:99px;padding:6px 14px;font-size:18px;font-weight:800}
+.rtl{font-size:14px;color:#ff8a8a}
+.fok{animation:fok .35s}.fno{animation:fno .35s}
+@keyframes fok{from{box-shadow:inset 0 0 0 999px #1f9d5599}to{box-shadow:none}}
+@keyframes fno{from{box-shadow:inset 0 0 0 999px #c1121f99}to{box-shadow:none}}
+.mini{padding:10px;border-radius:22px}.mini h3{font-size:15px;padding:6px}
+.back-face{justify-content:center;background:repeating-linear-gradient(45deg,#2A2260 0 14px,#33297a 14px 28px);color:var(--mu);font-size:18px;font-weight:700}
+.imp{justify-content:center;background:linear-gradient(160deg,#ff2d55,#7a0a2b)}
+.pop{animation:pop .15s ease-out}
+@keyframes pop{from{transform:scale(.88);opacity:0}}
+.hold{touch-action:none;-webkit-touch-callout:none;width:100%;display:flex;justify-content:center}
+.ring{position:relative;width:220px;height:220px}.ring svg{transform:rotate(-90deg)}
+.ring .t{position:absolute;inset:0;display:grid;place-items:center;font-size:56px;font-weight:800}
+.score{font-size:90px;font-weight:800;color:var(--li);line-height:1}
+.plist{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%}
+.pill{background:var(--card);border-radius:12px;padding:4px 12px;font-weight:700}
+.bar{height:8px;background:var(--bg2);border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;background:var(--li);transition:width 1s linear}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<button id="exit" aria-label="Abandonar partida" hidden>←</button>
+<div id="peek" hidden></div>
+<button id="help" aria-label="Cómo jugar">❓</button>
+<button id="mute" aria-label="Silenciar">🔊</button>
+<div id="app"></div>
+<div id="ad-banner">Espacio reservado · Banner AdMob 320×50</div>
+<div id="how" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="how-t" onclick="if(event.target===this)hideHow()"><div class="sheet">
+<h2 id="how-t">❓ Cómo Jugar</h2>
+<div class="hw"><b>🕵️‍♂️ El Impostor (3 a 10)</b><p>Pasen el teléfono: cada uno mantiene presionado para ver su carta. Todos ven la palabra secreta menos el impostor, que recibe una pista de apoyo para disimular. Cada ronda: pistas por turnos, debate libre y una votación que saca a una persona. Si era el impostor, el grupo avanza o gana; si era un inocente, queda afuera y el juego sigue. Sin límite de tiempo.</p></div>
+<div class="hw"><b>❓ ¿Quién Soy? (2 a 10)</b><p>Cada uno mira en secreto su propio personaje (mantené presionado). En tu turno le hacés una pregunta de sí o no a todo el grupo, que responde sobre su propio personaje. Con PASAR TURNO cedés el turno; con ARRIESGAR elegís a otro jugador y buscás en la lista su personaje: si acertás, queda eliminado. Gana el último en pie.</p></div>
+<div class="hw"><b>⚡ Ronda Relámpago (2 jugadores)</b><p>Elegí la dificultad: Fácil (personajes conocidos + pistas), Medio (clásico) o Difícil / Tabú (personajes difíciles + palabras prohibidas). Uno sostiene el celular en la frente, en horizontal, y adivina; el otro describe con ayuda de la referencia que aparece bajo el nombre. Inclinar hacia abajo 🟢 suma un punto y hacia arriba 🔴 pasa (o usá los botones laterales). Son 60 segundos por turno y gana quien sume más.</p></div>
+<div class="hw"><b>🗂️ Categorías</b><p>Antes de empezar activá de 1 a 5. El mazo mezcla solo los personajes de las elegidas.</p></div>
+<button id="howok" class="btn" onclick="hideHow()">¡Entendido!</button></div></div>
+<div id="quit" class="modal" hidden role="alertdialog" aria-modal="true" aria-labelledby="quit-t" aria-describedby="quit-d" onclick="if(event.target===this)hideQuit()"><div class="sheet">
+<h2 id="quit-t">¿Abandonar partida?</h2>
+<p id="quit-d" class="mu">Se perderá el progreso de la partida actual y volverás al menú principal.</p>
+<div class="grid"><button id="quitno" class="btn gh" onclick="hideQuit()">CANCELAR</button><button class="btn co" onclick="quitGame()">SALIR AL MENÚ</button></div></div></div>
+<script>
+/* ===== Banco de datos 1.0.0 · 175 personajes =====
+   Línea: Nombre|Referencia|Emoji|3 rasgos generales|3 palabras prohibidas   (categorías ilustradas)
+          Nombre|Referencia|3 rasgos generales|3 palabras prohibidas          (categorías tipográficas)
+   #1 = 🟢 Fácil · #2 = 🟡 Medio · #3 = 🔴 Difícil */
+const RAW={
+ani:`#1
+Homer Simpson|Los Simpson|🍩|Es amarillo;Es calvo;Es padre de familia|Dona;Springfield;Marge
+Shrek|Shrek|👹|Es verde;Es muy grande;Vive en un pantano|Ogro;Fiona;Burro
+Pikachu|Pokémon|⚡|Es amarillo;Es pequeño y adorable;Es un animal|Pokémon;Rayo;Ash
+Bob Esponja|Bob Esponja|🧽|Es amarillo;Es cuadrado;Vive bajo el agua|Esponja;Calamardo;Fondo de Bikini
+Buzz Lightyear|Toy Story|🚀|Viste de blanco y verde;Es un juguete;Tiene alas|Astronauta;Woody;Infinito
+Elsa|Frozen|❄️|Pelo rubio;Tiene poderes;Es una princesa|Hielo;Anna;Reina
+Stitch|Lilo & Stitch|👽|Es azul;Es un alienígena;Tiene orejas grandes|Lilo;Hawái;Experimento
+Mickey Mouse|Disney|🐭|Usa guantes blancos;Es un animal;Tiene orejas redondas|Ratón;Minnie;Orejas
+Woody|Toy Story|🤠|Usa sombrero;Es un juguete;Es el líder|Vaquero;Andy;Buzz
+Minions|Mi Villano Favorito|🍌|Son amarillos;Usan anteojos;Son pequeños|Banana;Gru;Bello
+Batman (Animado)|DC Comics / Animación|🦇|Usa capa y máscara;Viste de negro;Es un superhéroe|Murciélago;Gotham;Bruce Wayne
+Peppa Pig|Peppa Pig|🐷|Es rosa;Es un animal;Es una niña|Cerdita;Jorge;Charcos
+#2
+Rick Sanchez|Rick and Morty|🧪|Tiene pelo celeste;Es un científico;Es muy cínico|Morty;Portal;Laboratorio
+Bender|Futurama|🤖|Es un robot;Es de metal;Es sarcástico|Robot;Fry;Metal
+Goku|Dragon Ball Z|🐉|Pelo negro de punta;Famoso por su fuerza;Viste de naranja|Saiyajin;Kamehameha;Vegeta
+Spider-Man|Marvel / Spider-Verse|🕸️|Usa máscara;Viste de rojo y azul;Es un superhéroe|Araña;Telaraña;Peter Parker
+Ned Flanders|Los Simpson|🙏|Usa bigote;Usa anteojos;Es muy amable|Vecino;Homero;Religioso
+Timón|El Rey León (El suricata)|🐾|Es un animal;Es pequeño;Es muy divertido|Suricata;Pumba;Hakuna Matata
+Pumba|El Rey León (El jabalí)|🐗|Es un animal;Es grande;Es muy simpático|Jabalí;Timón;Hakuna Matata
+Mike Wazowski|Monsters, Inc.|👁️|Es verde;Tiene un solo ojo;Es redondo|Monsters;Sulley;Ojo
+Bart Simpson|Los Simpson|🛹|Es amarillo;Pelo de punta;Es un niño travieso|Springfield;Skate;Cowabunga
+Po|Kung Fu Panda|🐼|Es un animal;Es blanco y negro;Es muy comilón|Panda;Kung Fu;Fideos
+Gato con Botas|Shrek / DreamWorks|🥾|Usa sombrero;Es un animal;Es aventurero|Gato;Botas;Espada
+Bob Patiño|Los Simpson|🎭|Tiene pelo rizado y enorme;Es un villano de dibujos;Es muy culto|Bart;Pelo;Venganza
+Patricio Estrella|Bob Esponja|⭐|Es rosa;Es un animal;Es muy distraído|Estrella;Bob;Piedra
+#3
+Coraje|Coraje, el perro cobarde|🐕|Es un animal;Es rosado;Es cobarde|Perro;Muriel;Cobarde
+Johnny Bravo|Cartoon Network|💪|Tiene pelo rubio;Usa anteojos oscuros;Es muy musculoso|Músculos;Cartoon;Pelo
+Phineas|Phineas y Ferb|🏗️|Tiene la cabeza triangular;Es un niño;Hace inventos|Ferb;Verano;Inventos
+Dexter|El laboratorio de Dexter|🥽|Usa anteojos;Es un niño genio;Usa guantes|Laboratorio;Dee Dee;Genio
+El Grinch|Dr. Seuss / Versión animada|🎄|Es verde;Es peludo;Es gruñón|Navidad;Villa;Verde
+Aang|Avatar: La leyenda de Aang|🌀|Es un niño calvo;Tiene un tatuaje de flecha;Controla los elementos|Avatar;Flecha;Elementos
+Calamardo|Bob Esponja|🎶|Es un animal marino;Es gruñón;Toca el clarinete|Clarinete;Bob;Cangrejo
+Tom|Tom y Jerry (El gato)|🐈|Es un animal;Es gris azulado;Es muy persistente|Gato;Jerry;Persigue
+Jerry|Tom y Jerry (El ratón)|🐁|Es un animal;Es pequeño;Es muy astuto|Ratón;Tom;Queso
+Carl Fredricksen|Up: Una aventura de altura|🎈|Es un anciano;Usa anteojos;Es gruñón|Globos;Casa;Russell`,
+live:`#1
+Harry Potter|Saga Harry Potter|👓|Usa anteojos;Pelo oscuro;Es un joven con poderes|Mago;Hogwarts;Varita
+Pepe Argento|Casados con Hijos|🛋️|Es un hombre;Usa bigote;Es de una serie argentina|Moni;Familia;Hijos
+Darth Vader|Star Wars|🌑|Viste de negro;Usa capa y máscara;Es un villano|Sable;Luke;Imperio
+Jack Sparrow|Piratas del Caribe|🏴‍☠️|Usa sombrero;Líder o Capitán;Aventurero de los mares|Pirata;Ron;Perla Negra
+Tony Stark (Iron Man)|Marvel|🦾|Viste de rojo y dorado;Es un superhéroe;Es millonario|Armadura;Vengadores;Stark
+Mario Santos|Los Simuladores|🎬|Es el líder del equipo;Es de una serie argentina;Usa traje|Simuladores;Equipo;Plan
+Walter White|Breaking Bad|🧪|Es calvo;Usa anteojos;Fue profesor|Heisenberg;Química;Pinkman
+El Zorro|El Zorro (Serie clásica)|🗡️|Usa máscara;Usa capa y sombrero;Usa espada|Espada;Zeta;Antifaz
+Hermione Granger|Saga Harry Potter|📚|Es una joven con poderes;Tiene pelo rizado;Es muy estudiosa|Hogwarts;Harry;Varita
+Thor|Marvel|🔨|Pelo rubio;Usa capa;Famoso por su fuerza|Martillo;Trueno;Asgard
+Indiana Jones|Saga de aventuras|🤠|Usa sombrero;Es aventurero;Usa látigo|Látigo;Arqueólogo;Tesoro
+Wolverine|X-Men / Marvel|🐺|Pelo de punta;Famoso por su fuerza;Es un superhéroe|Garras;X-Men;Adamantium
+#2
+Tommy Shelby|Peaky Blinders|🎩|Usa gorra;Es líder de una banda;Viste de traje|Birmingham;Shelby;Gorra
+Sherlock Holmes|Sherlock / Detective|🔍|Famoso por su ingenio;Usa sombrero;Es británico|Detective;Watson;Lupa
+Moni Argento|Casados con Hijos|💅|Es una mujer;Es de una serie argentina;Es muy famosa por su humor|Pepe;Familia;Casados
+John Wick|John Wick|🔫|Viste de traje negro;Tiene barba;Es muy hábil|Perro;Hotel;Continental
+Eleven (11)|Stranger Things|🧇|Es una joven;Tiene poderes;Se hizo famosa en una serie|Stranger Things;Waffles;Telequinesis
+El Profesor|La Casa de Papel|🎭|Usa anteojos;Es un estratega;Es español|Casa de Papel;Atraco;Banco
+Guasón (Joker)|Batman / DC|🃏|Es un villano;Famoso por su risa;Viste de colores|Payaso;Batman;Risa
+Rocky Balboa|Rocky|🥊|Es un hombre fuerte;Usa guantes;Es un deportista|Boxeo;Escaleras;Filadelfia
+Michael Scott|The Office|☕|Es un jefe;Viste de traje;Es muy cómico|Oficina;Dunder Mifflin;Jim
+Forrest Gump|Forrest Gump|🏃|Es un hombre bondadoso;Corre mucho;Se sienta en un banco|Bombones;Camarones;Correr
+Severus Snape|Saga Harry Potter|⚗️|Viste de negro;Tiene pelo largo;Es profesor|Pociones;Hogwarts;Slytherin
+Gandalf|El Señor de los Anillos|🧙|Tiene barba larga;Usa sombrero puntiagudo;Es un mago|Anillo;Hobbit;Bastón
+Saul Goodman|Breaking Bad / Better Call Saul|⚖️|Viste de traje llamativo;Es muy hablador;Trabaja con la ley|Abogado;Walter;Albuquerque
+#3
+Hannibal Lecter|El silencio de los inocentes|🍷|Es muy educado;Es muy inteligente;Es un villano de película|Doctor;Clarice;Máscara
+Barney Stinson|How I Met Your Mother|🤵|Viste de traje;Es muy presumido;Es de una serie de comedia|Legendario;Ted;Traje
+Dexter Morgan|Dexter (Serie de forense)|🩸|Es un hombre;Trabaja en la policía científica;Es de una serie de misterio|Sangre;Miami;Hermana
+La Novia (Beatrix Kiddo)|Kill Bill (La de mameluco amarillo)|🥋|Viste de amarillo;Usa espada;Es una mujer guerrera|Kill Bill;Katana;Venganza
+Pablo Escobar|El Patrón del Mal / Narcos|📺|Es colombiano;Tiene bigote;Es un personaje de serie|Medellín;Narcos;Plata
+Katniss Everdeen|Los Juegos del Hambre|🏹|Es una joven;Usa arco y flecha;Tiene una trenza|Arco;Distrito;Juegos
+Arthur Shelby|Peaky Blinders (El hermano de Tommy)|🥃|Viste de traje;Usa gorra;Es parte de una familia de una serie|Hermano;Tommy;Birmingham
+Merlina Addams|Merlina / Los Locos Addams|🖤|Viste de negro;Tiene trenzas;Es una joven|Addams;Trenzas;Nevermore
+Tyrion Lannister|Game of Thrones|🍷|Es muy inteligente;Es de baja estatura;Es de una serie de fantasía|Tronos;Lannister;Vino
+Bane|Batman: El caballero de la noche asciende (El villano enmascarado)|😷|Usa máscara;Es muy grande y fuerte;Es un villano|Batman;Máscara;Gotham`,
+dep:`#1
+Lionel Messi|Selección Argentina / La Scaloneta|Zurdo;Usa el número 10;Es capitán de su selección|Pulga;Rosario;Barcelona
+Diego Maradona|Selección Argentina 1986|Zurdo;Usa el número 10;Fue capitán|Diego;Mano de Dios;Napoli
+Manu Ginóbili|Generación Dorada / Básquet NBA|Es argentino;Es zurdo;Es de básquet|Manu;Spurs;Básquet
+Lionel Scaloni|DT Selección Argentina|Es argentino;Es entrenador;Fue campeón del mundo|Scaloneta;Técnico;Qatar
+Juan Román Riquelme|Boca Juniors|Es argentino;Usa el número 10;Jugaba con calma y pausa|Boca;Román;Villarreal
+Martín Palermo|Boca Juniors|Es argentino;Es delantero;Es famoso por sus goles|Titán;Boca;Delantero
+Cristiano Ronaldo|Selección de Portugal / Real Madrid|Es delantero;Es famoso por su físico;Es capitán de su selección|Portugal;Siuuu;Real Madrid
+Gabriela Sabatini|Tenis Argentino|Es argentina;Es una mujer;Juega con raqueta|Tenis;US Open;Gaby
+Ángel Di María|Selección Argentina / Fideo|Es argentino;Usa el número 11;Es veloz y habilidoso|Fideo;Rosario;Mundial
+Emiliano "Dibu" Martínez|Selección Argentina / Arquero|Usa guantes;Es argentino;Es famoso por atajar penales|Arquero;Aston Villa;Penales
+#2
+Marcelo Gallardo|River Plate (DT)|Es argentino;Es entrenador;Fue jugador|River;Muñeco;Libertadores
+Carlos Tévez|Boca Juniors / El Apache|Es argentino;Es delantero;Tiene una marca en el cuello|Apache;Boca;Fuerte Apache
+Guillermo Vilas|Tenis / El Gran Willy|Es argentino;Juega con raqueta;Es un histórico del tenis|Tenis;Willy;Roland Garros
+Kun Agüero|Selección / Manchester City|Es argentino;Es delantero;Es famoso por un gol histórico|Kun;Manchester;Gol
+Luciana Aymar|Las Leonas / Hockey|Es argentina;Es una mujer;Juega un deporte con palo|Leonas;Hockey;Palo
+Franco Colapinto|Fórmula 1|Es argentino;Es piloto;Es joven|Fórmula 1;Auto;Williams
+Paulo Dybala|Selección Argentina / La Joya|Es argentino;Es delantero;Festeja con una máscara|Joya;Juventus;Máscara
+Javier Mascherano|Selección Argentina / Jefecito|Es argentino;Es mediocampista;Es muy aguerrido|Jefecito;Barcelona;Mediocampista
+Gabriel Batistuta|Batigol / Selección Argentina|Es argentino;Es delantero;Tiene pelo largo|Batigol;Fiorentina;Gol
+Juan Sebastián Verón|Estudiantes / La Brujita|Es argentino;Es mediocampista;Es famoso por sus pases|Brujita;Estudiantes;Pase
+#3
+Mario Alberto Kempes|Mundial 1978 / El Matador|Es argentino;Es delantero;Tiene pelo largo|Matador;Mundial;Goleador
+Juan Martín del Potro|Tenis / Torre de Tandil|Es argentino;Juega con raqueta;Es muy alto|Torre;Tandil;Tenis
+José Pekerman|Formador / DT de juveniles|Es argentino;Es entrenador;Formó juveniles|Juveniles;Técnico;Colombia
+Oscar Ruggeri|Selección 1986 / Cabezón|Es argentino;Es defensor;Es famoso por su cabeza|Cabezón;Defensor;Mundial
+Marcelo Bielsa|Director Técnico / El Loco|Es argentino;Es entrenador;Es muy obsesivo con el trabajo|Loco;Técnico;Leeds
+Maravilla Martínez|Boxeo argentino|Es argentino;Usa guantes;Practica un deporte de combate|Boxeo;Guantes;Ring
+Ubaldo Matildo Fillol|Pato Fillol / Arquero 1978|Es argentino;Usa guantes;Fue campeón del mundo|Pato;Arquero;Mundial
+Enzo Francescoli|River Plate / El Príncipe|Es uruguayo;Es delantero;Es elegante|Príncipe;River;Uruguay
+Agustín Pichot|Los Pumas / Rugby|Es argentino;Juega con pelota ovalada;Fue capitán|Rugby;Pumas;Ovalada
+Sergio "Chiquito" Romero|Arquero de la Selección / Mundial 2014|Es argentino;Usa guantes;Es famoso por atajar penales|Arquero;Chiquito;Penales`,
+far:`#1
+Moria Casán|Divas de la TV / La One|Es una mujer;Es argentina;Es una diva del espectáculo|La One;Teatro;Diva
+Ricardo Fort|El Comandante / Chocolates|Es un hombre;Es argentino;Era famoso por su excentricidad|Chocolate;Comandante;Millonario
+Mirtha Legrand|Almuerzos de TV / La Diva|Es una mujer;Es muy mayor;Conduce un programa de almuerzos|Almuerzo;Chiqui;Mesa
+Guido Kaczka|Conductor de TV / Los 8 Escalones|Es un hombre;Es conductor;Conduce programas de preguntas|Escalones;Preguntas;Conductor
+Susana Giménez|Divas de Telefe / Hola Susana|Es una mujer;Tiene pelo rubio;Es una diva de la TV|Telefe;Hola;Diva
+Marcelo Tinelli|ShowMatch / VideoMatch|Es un hombre;Es conductor;Es empresario de TV|ShowMatch;VideoMatch;Bailando
+Santiago Maratea|Influencer / Colectas solidarias|Es un hombre;Es influencer;Es famoso por hacer colectas|Colecta;Solidaria;Redes
+Wanda Nara|Empresaria y mediática|Es una mujer;Es empresaria;Es muy mediática|Mediática;Empresaria;Fútbol
+Marley|Conductor de viajes y bloopers|Es un hombre;Es conductor;Viaja por el mundo|Viajes;Bloopers;Conductor
+Pampita|Modelo y jurado de TV|Es una mujer;Es modelo;Es jurado de TV|Modelo;Jurado;Bailando
+Germán Martitegui|Jurado de MasterChef|Es un hombre;Es chef;Es jurado de TV|MasterChef;Chef;Cocina
+Florencia Peña|Actriz y conductora|Es una mujer;Es actriz;Es conductora|Actriz;Teatro;Conductora
+#2
+Luquitas Rodríguez|Streaming / Paren la Mano|Es un hombre;Es streamer;Es humorista|Streaming;Paren;Humor
+Lizy Tagliani|Humorista y conductora de radio/TV|Es una mujer;Es humorista;Es conductora|Humor;Radio;Conductora
+Coscu|Streamer / Pionero de la comunidad|Es un hombre;Es streamer;Es famoso en internet|Stream;Twitch;Comunidad
+Beto Casella|Bendita TV / Conductor|Es un hombre;Es conductor;Conduce un programa de actualidad|Bendita;Conductor;Programa
+Alejandro Fantino|Periodista / Ex Mar de Fondo|Es un hombre;Es periodista;Conduce programas de entrevistas|Periodista;Mar de Fondo;Entrevista
+Guillermo Coppola|Ex mánager de Maradona|Es un hombre;Fue mánager de futbolistas;Es muy mediático|Mánager;Maradona;Fútbol
+Darío Barassi|100 Argentinos Dicen / Actor y conductor|Es un hombre;Es conductor;Conduce programas de concursos|Argentinos;Concurso;Cien
+Migue Granados|Olga / Streaming y humor|Es un hombre;Es humorista;Es streamer|Olga;Humor;Streaming
+Graciela Alfano|Actriz y diva mediática|Es una mujer;Es actriz;Es una diva de los medios|Actriz;Diva;Vedette
+Chiche Gelblung|Periodista histórico de TV|Es un hombre;Es periodista;Es histórico de la TV|Periodista;Noticias;TV
+Nico Occhiato|Luzu TV / Conductor y productor|Es un hombre;Es conductor;Es productor|Luzu;Conductor;Streaming
+Roberto Pettinato|Duro de Domar / Músico y conductor|Es un hombre;Es conductor;Toca el saxo|Saxo;Sumo;Duro de Domar
+Donato de Santis|Chef italiano / Jurado de MasterChef|Es un hombre;Es chef;Es italiano|Chef;Italia;Pasta
+#3
+Santiago Korol|Videomatch / Pura Química|Es un hombre;Es de la TV;Fue parte de un ciclo de humor|Videomatch;Pura Química;Humor
+Iván de Pineda|Pasapalabra / Conductor culto|Es un hombre;Es conductor;Conduce programas de preguntas|Pasapalabra;Cultura;Conductor
+Vero Lozano|Cortá por Lozano / Conductora|Es una mujer;Es conductora;Conduce un programa|Lozano;Cortá;Conductora
+Guido Süller|Mediático histórico de la TV|Es un hombre;Es mediático;Es de la TV|Mediático;Farándula;Televisión
+Silvia Süller|Parda histórica de la farándula|Es una mujer;Es mediática;Es de la TV|Parda;Farándula;Mediática
+Marcelo Polino|Periodista de espectáculos / Jurado punzante|Es un hombre;Es periodista de espectáculos;Es jurado de TV|Espectáculos;Jurado;Periodista
+Ángel de Brito|LAM / Periodista de chimentos|Es un hombre;Es periodista de espectáculos;Conduce un programa de chimentos|LAM;Chimentos;Periodista
+Carmen Barbieri|Actriz, capocómica y conductora|Es una mujer;Es actriz;Es capocómica|Capocómica;Teatro;Conductora
+Alejandro Stoessel|Productor de TV / Papá de Tini|Es un hombre;Es productor de TV;Es familiar de una cantante|Tini;Productor;Papá
+Jorge Rial|Intrusos / Conductor histórico de chimentos|Es un hombre;Es periodista;Conduce programas de chimentos|Intrusos;Chimentos;Conductor`,
+mus:`#1
+Gustavo Cerati|Soda Stereo / Solista|Es líder de una banda;Toca la guitarra;Es cantautor|Soda Stereo;Zeta;Guitarra
+Charly García|Sui Generis / Serú Girán / Solista|Tiene pelo largo;Toca teclados o piano;Fue líder de bandas|Sui Generis;Serú Girán;Teclado
+Indio Solari|Patricio Rey y sus Redonditos de Ricota|Usa anteojos oscuros;Tiene barba;Fue líder de una banda|Redondos;Ricota;Olavarría
+Duki|Trap Argentino / El Quinto Escalón|Es argentino;Es rapero;Tiene tatuajes|Trap;Goteo;Quinto Escalón
+Bizarrap|BZRP Music Sessions / Productor|Usa anteojos oscuros;Es argentino;Es productor|Sessions;Productor;Biza
+Fito Páez|Rock Rosarino / El amor después del amor|Es solista;Es cantautor;Tiene pelo oscuro|Rosario;Mariposa;Amor
+María Becerra|Pop Urbano / La Nena de Argentina|Es una mujer;Es argentina;Canta música urbana|Urbano;Reggaetón;Nena
+L-Gante|Cumbia 420|Es un hombre;Es argentino;Usa gorra y cadenas|Cumbia;420;Gorra
+Tini Stoessel|Pop Juvenil / Ex Violetta|Es una mujer;Es argentina;Se hizo famosa de joven|Violetta;Disney;Stoessel
+Nicki Nicole|Trap / Pop Urbano de Rosario|Es una mujer;Es de Rosario;Canta trap y pop urbano|Rosario;Trap;Urbano
+Paulo Londra|Trap melódico cordobés|Es un hombre;Es de Córdoba;Canta trap melódico|Córdoba;Trap;Melódico
+Abel Pintos|Folclore / Pop romántico|Es un hombre;Es argentino;Canta folclore y pop romántico|Folclore;Romántico;Bahía
+Soledad Pastorutti|La Sole / Folclore de Arequito|Es una mujer;Canta folclore;Es de Arequito|Sole;Folclore;Arequito
+Miranda!|Pop electro / Ale Sergi y Juliana Gattas|Es un grupo pop;Tiene un cantante y una cantante;Hace música electrónica|Electro;Sergi;Gattas
+#2
+Wos|Rap / Rock alternativo / Valentín Oliva|Es un hombre;Es rapero;Es argentino|Rap;Freestyle;Valentín
+Adrián Dárgelos|Babasónicos / Rock sónico|Es el frontman de una banda;Tiene estética glam;Es famoso por sus movimientos teatrales|Babasónicos;Glam;Frontman
+Pato Fontanet|Callejeros / Don Osvaldo|Es cantante de rock barrial;Tiene voz rasposa y pasional;Escribe letras de tribuna y barrio|Callejeros;Don Osvaldo;Barrial
+Andrés Calamaro|Los Abuelos de la Nada / El Salmón|Es cantautor;Fue parte de bandas;Es solista|Abuelos;Salmón;Flaca
+La Mona Jiménez|El cuarteto cordobés|Es un hombre;Es de Córdoba;Canta cuarteto|Cuarteto;Córdoba;Mona
+Ciro Martínez|Los Piojos / Ciro y los Persas|Es cantante;Fue líder de una banda;Hace rock con mucha energía|Los Piojos;Persas;Ciro
+Luis Alberto Spinetta|El Flaco / Almendra / Pescado Rabioso|Tiene pelo largo;Toca la guitarra;Fue líder de bandas|Flaco;Almendra;Invisible
+YSY A|Trap / El Quinto Escalón|Es un hombre;Es rapero;Es argentino|Trap;Escalón;Rap
+Ricardo Mollo|Divididos / Sumo|Es un hombre;Toca la guitarra;Es líder de una banda|Divididos;Sumo;Guitarra
+Lit Killah|Trap / Rapero y freestyler|Es un hombre;Es rapero;Es freestyler|Trap;Freestyle;Rap
+Vicentico|Los Fabulosos Cadillacs|Es cantante;Fue parte de una banda mítica;Es solista hoy|Cadillacs;Matador;Ska
+Gilda|Cumbia tropical / Santa popular|Es una mujer;Cantaba cumbia;Es venerada como una santa popular|Cumbia;Santa;Tropical
+Pity Álvarez|Viejas Locas / Intoxicados|Es cantante de rock barrial;Fue líder de bandas;Tiene voz rasposa|Viejas Locas;Intoxicados;Barrial
+Cucho Parisi|Los Auténticos Decadentes|Es un hombre;Es cantante;Hace rock festivo|Decadentes;Fiesta;Auténticos
+#3
+Luca Prodan|Sumo / Rock underground de los 80s|Nació en Italia;Fue líder de una banda;Su banda mezclaba inglés y castellano|Sumo;Italia;Escocia
+Pappo|Pappo's Blues / Riff / El Carpo del rock|Toca la guitarra;Hace blues rock;Tiene pelo largo y barba|Blues;Moto;Riff
+León Gieco|Folk rock / Solo le pido a Dios|Es un hombre;Toca la armónica;Hace folk rock|Armónica;Dios;Folk
+Ricardo Iorio|V8 / Hermética / Almafuerte (El patriarca del metal)|Fue líder de bandas;Hace heavy metal;Es de Buenos Aires|Hermética;Almafuerte;V8
+Hilda Lizarazu|Man Ray / Corista de Charly García|Es una mujer;Es cantante;Fue corista de un músico famoso|Man Ray;Corista;Charly
+Juanse|Ratones Paranoicos / Rock stone argentino|Es cantante;Fue líder de una banda;Hace rock and roll clásico|Ratones;Stones;Rock and roll
+Joaquín Levinton|Turf / Pop rock fiestero|Es un hombre;Es cantante;Hace pop rock|Turf;Fiesta;Pop
+Patricio Sardelli|Airbag / Guitarrista y cantante|Es un hombre;Toca la guitarra;Es cantante de una banda|Airbag;Guitarra;Banda
+Dillom|Trap alternativo / Post-punk local|Es un hombre;Es rapero;Hace trap alternativo|Trap;Rap;Alternativo
+Emanero|Rap / Productor de colaboraciones retro|Es un hombre;Es rapero;Es productor|Rap;Productor;Retro
+FMK|Pop urbano / Compositor de hits|Es un hombre;Es cantante;Es compositor|Pop;Compositor;Hits
+Litto Nebbia|Los Gatos / Pionero fundador del rock nacional|Fue líder de una banda;Es pionero del rock argentino;Es cantautor|Los Gatos;La Balsa;Rosario`
+};
+const META={ani:['Pelis & Series Animadas','🎞️',330,'f'],live:['Cine & TV Live Action','🎥',200,'f'],dep:['Fútbol & Deportes Leyendas','⚽',130,'r'],far:['Íconos de la Farándula & Cultura Pop','📺',275,'r'],mus:['Música Argentina · Rock, Trap, Cumbia & Pop','🎶',20,'r']};
+const CATS={};
+/* c = [nombre, emoji, rasgos, rasgos, prohibidas, categoría, referencia, nivel 1-3] */
+for(const k in META){const[nn,ee,hh,tt]=META[k];let tier=1;CATS[k]={n:nn,e:ee,h:hh,t:tt,p:[]};
+RAW[k].trim().split('\n').forEach(l=>{if(l[0]=='#'){tier=+l[1];return}
+const f=l.split('|'),g=tt=='f'?f:[f[0],f[1],'',f[2],f[3]],a=g[3].split(';');
+CATS[k].p.push([g[0],g[2],a,a,g[4].split(';'),k,g[1],tier])})}
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function art(c){return `<div class="fb" role="img" aria-label="${esc(c[0])}">${c[1]}</div>`}
+
+/* ===== Almacenamiento local (preferencias y partidas) ===== */
+const store={get(k,d){try{const v=localStorage.getItem('qs_'+k);return v===null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('qs_'+k,JSON.stringify(v));return true}catch(e){return false}}};
+let muted=store.get('mute',false),cfg=store.get('cfg',{np:5,ni:1}),stats=store.get('stats',{played:0});
+function bump(){stats.played++;store.set('stats',stats)}
+
+/* ===== Audio: un solo contexto, una sola música, todo se limpia al cambiar de pantalla ===== */
+let ac=null,master=null,tension=0;
+function initAudio(){if(ac)return;try{ac=new (window.AudioContext||window.webkitAudioContext)();master=ac.createGain();master.gain.value=muted?0:.7;master.connect(ac.destination)}catch(e){ac=null}}
+function tone(f,d,type,v,w){if(!ac||muted||ac.state!=='running')return;const o=ac.createOscillator(),g=ac.createGain(),t=ac.currentTime+(w||0);o.type=type||'sine';o.frequency.value=f;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(v||.05,t+.03);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(master);o.start(t);o.stop(t+d+.05);o.onended=()=>{try{o.disconnect();g.disconnect()}catch(e){}}}
+const Mu={g:0,m:null,i:0,t:null,
+set(m){if(this.m===m)return;this.m=m;this.g++;clearTimeout(this.t);this.i=0;this.run(this.g)},
+run(g){if(g!==this.g)return;let w=480;
+if(ac&&!muted&&ac.state==='running'){
+if(this.m==='tense'){const k=tension;w=Math.round(430-k*260);const n=[110,131,123,131][this.i%4];tone(n,w/1000*1.1,'sawtooth',.03+k*.03);tone(this.i%2?1900:1300,.03,'square',.02+k*.035);if(this.i%8==0)tone(55,.6,'sine',.1)}
+else{const sc=[262,330,392,523,392,330,294,392];tone(sc[this.i%8],.55,'triangle',.05);if(this.i%8==0)tone(131,2,'sine',.04)}}
+this.i++;this.t=setTimeout(()=>this.run(g),w)}};
+function sfx(f,d){tone(f,d||.1,'square',.05)}
+const muteBtn=document.getElementById('mute');
+function paintMute(){muteBtn.textContent=muted?'🔇':'🔊';muteBtn.setAttribute('aria-label',muted?'Activar sonido':'Silenciar')}
+muteBtn.onclick=()=>{initAudio();muted=!muted;store.set('mute',muted);if(master)master.gain.value=muted?0:.7;paintMute()};
+paintMute();
+document.addEventListener('pointerdown',()=>{initAudio();if(ac&&ac.state==='suspended')ac.resume()});
+
+/* ===== Efectos de sonido sintetizados (100% offline) ===== */
+const Fx={hn:null,
+noise(d,f0,f1,v){if(!ac||muted||ac.state!=='running')return;const n=Math.floor(ac.sampleRate*d),b=ac.createBuffer(1,n,ac.sampleRate),a=b.getChannelData(0);for(let i=0;i<n;i++)a[i]=Math.random()*2-1;const s=ac.createBufferSource(),f=ac.createBiquadFilter(),g=ac.createGain(),t=ac.currentTime;s.buffer=b;f.type='bandpass';f.frequency.setValueAtTime(f0,t);f.frequency.exponentialRampToValueAtTime(f1,t+d);g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);s.connect(f);f.connect(g);g.connect(master);s.start(t);s.onended=()=>{try{s.disconnect();f.disconnect();g.disconnect()}catch(e){}}},
+hum(on){if(!ac||muted||ac.state!=='running')return;
+if(on&&!this.hn){const o=ac.createOscillator(),g=ac.createGain(),f=ac.createBiquadFilter();o.type='sawtooth';o.frequency.value=70;f.type='lowpass';f.frequency.value=260;g.gain.value=0;o.connect(f);f.connect(g);g.connect(master);o.start();g.gain.linearRampToValueAtTime(.08,ac.currentTime+.15);this.hn={o,g}}
+else if(!on&&this.hn){const{o,g}=this.hn;this.hn=null;g.gain.cancelScheduledValues(ac.currentTime);g.gain.linearRampToValueAtTime(0,ac.currentTime+.08);o.stop(ac.currentTime+.12);o.onended=()=>{try{o.disconnect();g.disconnect()}catch(e){}}}},
+paper(){this.noise(.18,1200,3200,.18)},
+gavel(){tone(110,.15,'square',.12);this.noise(.08,300,120,.25)},
+jackpot(){[523,659,784,1047,1319].forEach((f,i)=>tone(f,.16,'triangle',.09,i*.07))},
+win(){[784,988,1175,1568].forEach((f,i)=>tone(f,.18,'triangle',.1,i*.08))},
+fail(){tone(300,.16,'sawtooth',.08);tone(220,.24,'sawtooth',.08,.13)},
+ding(){tone(1568,.25,'triangle',.12);tone(2093,.3,'sine',.08,.06)},
+whoosh(){this.noise(.14,2500,500,.18)}};
+
+/* ===== Puente nativo: Capacitor si existe, alternativa web si no =====
+   Plugins previstos: @capacitor/screen-orientation, @capacitor/motion, @capacitor/haptics, @capacitor-community/admob */
+const AD_UNIT_ID='ca-app-pub-3940256099942544/6300978111'; /* ID de PRUEBA de Google: reemplazar por el real al publicar */
+const Native={
+cap(){return !!(window.Capacitor&&window.Capacitor.isNativePlatform&&window.Capacitor.isNativePlatform())},
+plug(n){return window.Capacitor&&window.Capacitor.Plugins?window.Capacitor.Plugins[n]:null},
+async orient(m){try{const P=this.plug('ScreenOrientation');
+if(P&&P.lock){await P.lock({orientation:m})}
+else if(m==='landscape'){const d=document.documentElement;if(d.requestFullscreen&&!document.fullscreenElement)await d.requestFullscreen();if(screen.orientation&&screen.orientation.lock)await screen.orientation.lock('landscape')}
+else{if(screen.orientation&&screen.orientation.unlock)screen.orientation.unlock();if(document.fullscreenElement)document.exitFullscreen()}}catch(e){}},
+motion:{h:null,w:null,
+async start(cb){const P=Native.plug('Motion');
+if(P&&P.addListener){try{this.h=await P.addListener('accel',e=>cb(((e.accelerationIncludingGravity||e.acceleration||{}).z)||0));return true}catch(e){return false}}
+const DM=window.DeviceMotionEvent;
+try{if(DM&&typeof DM.requestPermission==='function'){if((await DM.requestPermission())!=='granted')return false}else if(!DM)return false}catch(e){return false}
+this.w=e=>{const g=e.accelerationIncludingGravity;if(g)cb((IOS?-1:1)*(g.z||0))};window.addEventListener('devicemotion',this.w);return true},
+stop(){try{if(this.h&&this.h.remove)this.h.remove()}catch(e){}this.h=null;try{if(this.w)window.removeEventListener('devicemotion',this.w)}catch(e){}this.w=null}},
+haptic:{
+v(p){try{const H=Native.plug('Haptics');if(H&&H.vibrate){H.vibrate({duration:Array.isArray(p)?p.reduce((a,b)=>a+b,0):p});return}if(navigator.vibrate)navigator.vibrate(p)}catch(e){}},
+tap(){this.v(15)},tilt(){this.v(30)},
+hold(on){on?this.v(Array.from({length:40},(_,i)=>i%2?45:8)):this.v(0)},
+pattern(k){try{const H=Native.plug('Haptics');if(H&&H.notification){H.notification({type:k=='win'?'SUCCESS':'ERROR'});return}}catch(e){}this.v(k=='win'?[40,30,40,30,160]:[220,70,70,70,70])}},
+ads:{async init(){const A=Native.plug('AdMob'),b=document.getElementById('ad-banner');if(!A||!b)return;
+try{await A.initialize({});await A.showBanner({adId:AD_UNIT_ID,adSize:'BANNER',position:'BOTTOM_CENTER',isTesting:true});b.textContent=''}catch(e){}}},
+init(){if(this.cap()){this.orient('portrait');this.ads.init()}}};
+
+/* ===== Identidad visual por modo ===== */
+function applyMode(s){const m=(!S.mode||s==='home'||s==='names')?'':S.mode,de=document.documentElement;if(de&&de.setAttribute)de.setAttribute('data-mode',m)}
+
+/* ===== Núcleo ===== */
+
+const $=document.getElementById('app');
+let S={},T=null;
+const TENSE=['rplay','gvote'];
+const GAMES=['gpass','gcard','ground','gdebate','gvote','gelim','wdeal','wsee','wturn','wtarget','wguess','wresolve','rready','rplay','rend'];
+const rnd=a=>a[Math.floor(Math.random()*a.length)];
+const shuf=a=>a.map(x=>[Math.random(),x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);
+const grad=h=>`linear-gradient(150deg,hsl(${h} 85% 58%),hsl(${(h+45)%360} 80% 38%))`;
+function clearT(){if(T){clearInterval(T);T=null}}
+function go(s,o){clearT();tension=0;Object.assign(S,o||{});S.screen=s;{const xb=document.getElementById('exit');if(xb)xb.hidden=!GAMES.includes(s);const pv=document.getElementById('peek');if(pv)pv.hidden=true}if(s!=='rplay')stopRel();Fx.hum(false);applyMode(s);if(s==='gvote')S.vt=Date.now();Mu.set(TENSE.includes(s)?'tense':'menu');R[s]();window.scrollTo(0,0)}
+function hdr(t,back){return `<div class="top${GAMES.includes(S.screen)?' pl':''}">${back?`<button class="back" onclick="go('${back}')" aria-label="Volver">←</button>`:''}<span class="mu">${t||''}</span></div>`}
+function extra(c,view,mini){
+if(!view||view=='m')return '';
+if(view=='t')return `<p class="tl bad">Palabras prohibidas</p><ul class="tb">${c[4].map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`;
+return `<p class="tl">Pistas de apoyo</p><ul class="tp">${c[2].slice(0,mini?2:3).map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`}
+function cardHTML(c,cat,mini,view){
+if(cat.t=='r')return `<div class="card tcard pop${mini?' mini':''}" style="--h:${cat.h}"><div class="frame"><span class="orn">✦</span><p class="tc">${esc(cat.n)}</p><h3 class="tn">${esc(c[0])}</h3><div class="orn">✦ ✦ ✦</div>${extra(c,view,mini)}</div></div>`;
+const ex=view=='f'||view=='t'?`<div class="fx">${extra(c,view,mini)}</div>`:'';
+return `<div class="card pop${mini?' mini':''}" style="background:${grad(cat.h)}"><div class="avw">${art(c)}</div><h3>${esc(c[0])}</h3>${ex}</div>`}
+function hold(head,front,txt,label,next){
+S.seen=false;
+const back=`<div class="card back-face"><div style="font-size:60px">👆</div>${txt}</div>`;
+$.innerHTML=`${hdr(head)}<div class="center"><div id="hb" class="hold">${back}</div><p class="mu">Al soltar, la carta se oculta.</p></div><button id="nx" class="btn sk" disabled>${label}</button>`;
+const hb=document.getElementById('hb'),nx=document.getElementById('nx');
+const on=e=>{e.preventDefault();hb.innerHTML=front;S.seen=true;holdFx(1)},off=()=>{hb.innerHTML=back;holdFx(0);if(S.seen)nx.disabled=false};
+hb.onpointerdown=on;hb.onpointerup=off;hb.onpointerleave=off;hb.onpointercancel=off;hb.oncontextmenu=e=>e.preventDefault();nx.onclick=next}
+function passScreen(who,msg,nextFn,color){return `<div class="center"><div style="font-size:70px" class="pop">📲</div><h2>Pasale el teléfono a</h2><h1 style="color:var(--${color||'li'})">${who}</h1><p class="mu">${msg}</p></div><button class="btn" onclick="${nextFn}">Soy yo, continuar</button>`}
+
+const REL_SECS=60,TIER_FILTER=true,TIER_OF={f:1,m:2,t:3},ct=c=>CATS[c[5]],IOS=typeof navigator!=='undefined'&&/iP(hone|ad|od)/.test(navigator.userAgent||'');
+S.names=store.get('names',['','','']);
+S.cats=(cfg.cats||Object.keys(CATS)).filter(k=>CATS[k]);if(!S.cats.length)S.cats=Object.keys(CATS);
+S.diff=cfg.diff||'m';S.ni=cfg.ni||1;
+const pn=i=>esc(((S.names[i]||'')+'').trim()||'Jugador '+(i+1));
+const deckSize=()=>S.cats.reduce((a,k)=>a+CATS[k].p.length,0);
+const keepY=f=>{const y=window.scrollY||0;f();window.scrollTo(0,y)};
+const norm=t=>String(t).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+const DIFFS=[['f','🟢','Fácil','Personajes conocidos + pistas de apoyo'],['m','🟡','Medio','Clásico: nombre + referencia'],['t','🔴','Difícil / Tabú','Personajes difíciles + 3 palabras prohibidas']];
+
+const R={
+names(){
+$.innerHTML=`${hdr('Jugadores','home')}<h2>👥 JUGADORES</h2><p class="mu">Toca para agregar o editar nombres</p>
+${S.names.map((n,i)=>`<div class="nrow"><span class="pill">${i+1}</span><input class="nm" maxlength="14" placeholder="Jugador ${i+1}" value="${esc(n)}" oninput="S.names[${i}]=this.value" aria-label="Nombre del jugador ${i+1}">${S.names.length>2?`<button class="back" onclick="delName(${i})" aria-label="Quitar jugador ${i+1}">✕</button>`:''}</div>`).join('')}
+${S.names.length<10?`<button class="btn gh" onclick="addName()">+ Agregar jugador</button>`:''}
+<div style="flex:1"></div><button class="btn" onclick="saveNames()">Guardar</button>`},
+
+home(){
+const n=S.names.length;
+$.innerHTML=`<div style="padding:22px 0 4px"><div style="font-size:54px">🕵️</div><h1 style="font-size:44px">¿Qué<br><span style="color:var(--li)">Hacemos?</span></h1></div>
+<button class="tile" onclick="S.mode='imp';go('gsetup')"><span class="ic" style="background:#6B21A8">🕵️‍♂️</span><div><b>El Impostor</b><span class="s">De 3 a 10 jugadores${n<3?' · ⚠️ faltan jugadores':''}</span></div></button>
+<button class="tile" onclick="S.mode='who';go('cats')"><span class="ic" style="background:#2563EB">❓</span><div><b>¿Quién Soy?</b><span class="s">De 2 a 10 jugadores</span></div></button>
+<button class="tile" onclick="S.mode='rel';go('rsetup')"><span class="ic" style="background:#10B981">⚡</span><div><b>Ronda Relámpago</b><span class="s">Para 2 jugadores</span></div></button>
+<p class="sec">👥 JUGADORES</p><p class="mu" style="margin-top:-8px">Toca para agregar o editar nombres</p>
+<button class="tile" onclick="go('names')" aria-label="Editar jugadores"><div class="chips">${S.names.map((_,i)=>`<span class="pill">${pn(i)}</span>`).join('')}</div></button>
+<p class="mu" style="text-align:center">Partidas jugadas: ${stats.played}</p>`},
+
+gsetup(){
+const n=S.names.length;if(n<5)S.ni=1;
+$.innerHTML=`${hdr('El Impostor','home')}<h2>Armá la partida</h2>${n<3?`<p class="mu">El Impostor se juega de 3 a 10 jugadores. Ahora hay ${n}.</p><button class="btn gh" onclick="go('names')">Editar jugadores</button>`:`<p class="mu">Juegan ${n}: ${S.names.map((_,i)=>pn(i)).join(', ')}</p>
+<p class="mu">Impostores</p><div class="seg"><button class="${S.ni==1?'on':''}" onclick="setNi(1)">1</button><button class="${S.ni==2?'on':''}" onclick="setNi(2)" style="${n<5?'opacity:.35':''}">2</button></div>${n<5?'<p class="mu">Con 2 impostores se necesitan 5 o más jugadores.</p>':''}
+<div style="flex:1"></div><button class="btn" onclick="go('cats')">Elegir categorías</button>`}`},
+
+rsetup(){
+const n=S.names.length;if(S.dA==null||S.dA>=n)S.dA=0;if(S.dB==null||S.dB>=n||S.dB==S.dA)S.dB=S.dA==1?0:1;
+const opt=sel=>S.names.map((_,i)=>`<option value="${i}"${i==sel?' selected':''}>${pn(i)}</option>`).join('');
+$.innerHTML=`${hdr('Ronda Relámpago','home')}<h2>⏱️ Ronda Relámpago</h2><p class="mu">${REL_SECS} segundos por turno · se juega en horizontal</p>${n>2?`<p class="mu">¿Quiénes juegan?</p><div class="seg"><select class="sel" onchange="S.dA=+this.value" aria-label="Primer jugador">${opt(S.dA)}</select><select class="sel" onchange="S.dB=+this.value" aria-label="Segundo jugador">${opt(S.dB)}</select></div>`:''}
+<p class="mu">Dificultad</p>${DIFFS.map(d=>`<button class="tile" style="${S.diff==d[0]?'border-color:var(--li)':''}" onclick="setDiff('${d[0]}')"><span class="ic" style="background:var(--bg2)">${d[1]}</span><div><b>${d[2]}</b><span class="s">${d[3]}</span></div></button>`).join('')}
+<div style="flex:1"></div><button class="btn" onclick="go('cats')">Elegir categorías</button>`},
+
+cats(){
+const sel=S.cats,back=S.mode=='imp'?'gsetup':S.mode=='who'?'home':'rsetup';
+$.innerHTML=`${hdr('Categorías',back)}<h2>¿Qué categorías jugamos?</h2><p class="mu">Activá de 1 a 5. El mazo mezcla solo los personajes de las categorías elegidas.</p>
+${Object.entries(CATS).map(([k,c])=>{const on=sel.includes(k);return `<button class="tile chk${on?' on':''}" role="checkbox" aria-checked="${on}" onclick="toggleCat('${k}')"><span class="ic" style="background:${grad(c.h)}">${c.e}</span><div><b>${c.n}</b><span class="s">${c.t=='f'?'Tarjeta ilustrada':'Tarjeta tipográfica'} · ${c.p.length} personajes</span></div><span class="box">${on?'✓':''}</span></button>`}).join('')}
+<p class="mu" style="text-align:center">${sel.length?`${sel.length} activa${sel.length>1?'s':''} · ${deckSize()} personajes en el mazo`:'Activá al menos 1 categoría para comenzar.'}</p>
+<div style="flex:1"></div><button class="btn" ${sel.length?'':'disabled'} onclick="start()">¡Empezar!</button>`},
+
+/* --- El Impostor --- */
+gpass(){$.innerHTML=passScreen(pn(S.i),'Que nadie más mire la pantalla.',"go('gcard')")},
+gcard(){
+const imp=S.imps.includes(S.i),n=S.names.length;
+const front=imp?`<div class="card imp pop"><div style="font-size:64px">🤫</div><h3>ERES EL IMPOSTOR</h3><div class="hint"><b>🕵️ PISTA DE APOYO: ${esc(S.hints[S.i]||'')}</b></div><p style="color:#fffd;font-size:13px;line-height:1.35">⚠️ Cuidado: Úsala con disimulo en el debate. Si la dices tal cual, sabrán que eres el Impostor.</p></div>`:cardHTML(S.char,ct(S.char));
+hold(pn(S.i)+' · '+(S.dj+1)+' de '+n,front,'Mantené presionado<br>para ver tu carta',S.dj+1<n?'Siguiente jugador':'Empezar ronda de pistas',()=>{if(S.dj+1<n){S.dj++;S.i=(S.i+1)%n;go('gpass')}else go('ground')})},
+ground(){
+const al=S.alive,k=S.off%al.length,ord=[...al.slice(k),...al.slice(0,k)];
+$.innerHTML=`${hdr('Ronda de pistas')}<h2>Orden de participación</h2><p class="mu">Cada uno dice una palabra o pista, en este orden:</p>
+<ul class="olist">${ord.map((p,j)=>`<li><b>${j+1}°</b><span>${pn(p)}</span></li>`).join('')}</ul>
+<p class="mu" style="text-align:center">${ord.map((p,j)=>`${j+1}° ${pn(p)}`).join(' ➔ ')}</p>
+<div style="flex:1"></div><button class="btn co" onclick="go('gdebate')">Ir al debate</button>`},
+gdebate(){
+$.innerHTML=`${hdr('Debate')}<div class="center"><div style="font-size:72px" class="pop">💬</div><h2>¡Debatan libremente!</h2><p class="mu">Sin límite de tiempo. Hablen, pregunten y sospechen hasta estar listos para votar.</p></div><button class="btn co" onclick="go('gvote')">Ir a votación</button>`},
+gvote(){
+$.innerHTML=`${hdr('Votación')}<h2>¿Quién es el impostor?</h2><p class="mu">Voten juntos: esta votación saca a una persona de la partida.</p><div class="plist">${S.alive.map(i=>`<button class="tile" style="justify-content:center;padding:18px 8px" onclick="gvoted(${i})"><b>${pn(i)}</b></button>`).join('')}</div>`;
+T=setInterval(()=>{if(S.screen!=='gvote'){clearT();return}tension=Math.min(1,(Date.now()-S.vt)/60000)},1000)},
+gelim(){
+const imp=S.wasImp;
+$.innerHTML=`<div class="center"><div style="font-size:76px" class="pop">${imp?'🎯':'😬'}</div><h2>${imp?'¡Atraparon a un impostor!':'¡Se equivocaron!'}</h2><p class="mu">${pn(S.voted)} ${imp?'era impostor, pero todavía queda otro suelto.':'era inocente y queda eliminado. ¡El impostor sigue entre ustedes!'}</p><p class="mu">Siguen en juego: <b style="color:var(--li)">${S.alive.map(pn).join(', ')}</b></p></div><button class="btn" onclick="S.off=Math.floor(Math.random()*S.alive.length);go('ground')">Seguir jugando</button>`},
+gresult(){
+const win=S.win=='group';
+$.innerHTML=`<div class="center"><div style="font-size:76px" class="pop">${win?'🎉':'😈'}</div><h2>${win?'¡Ganó el grupo!':'¡Ganaron los impostores!'}</h2><p class="mu">${win?'Descubrieron a todos los impostores.':'Los impostores ya igualan en número a los inocentes.'}</p><p class="mu">Impostor${S.imps.length>1?'es':''}: <b style="color:var(--co)">${S.imps.map(pn).join(' y ')}</b></p>${cardHTML(S.char,ct(S.char))}</div><button class="btn" onclick="start()">Jugar de nuevo</button><button class="btn gh" onclick="go('home')">Menú principal</button>`},
+
+/* --- ¿Quién Soy? --- */
+wdeal(){
+$.innerHTML=`<div class="center"><div style="font-size:70px" class="pop">📲</div><h2>Pásale el teléfono a</h2><h1 style="color:var(--li)">${pn(S.wi)}</h1><p class="mu">Que nadie más mire la pantalla.</p></div><button class="btn" onclick="go('wsee')">Soy yo, continuar</button>`},
+wsee(){
+const n=S.names.length,c=S.assign[S.wi],last=S.wj+1>=n;
+hold(pn(S.wi)+' · '+(S.wj+1)+' de '+n,cardHTML(c,ct(c)),'Mantené presionado<br>para ver tu carta',last?'LISTO, TAPAR Y EMPEZAR':'LISTO, TAPAR Y PASAR',()=>{if(last){S.cur=S.alive[Math.floor(Math.random()*S.alive.length)];go('wturn')}else{S.wj++;S.wi=(S.wi+1)%n;go('wdeal')}})},
+wturn(){
+const p=S.cur,c=S.assign[p];
+$.innerHTML=`${hdr('¿Quién Soy?')}<div class="center"><p class="mu">Turno de</p><h1 style="color:var(--li);font-size:40px">${pn(p)}</h1><p class="mu" style="max-width:300px">Hacele una pregunta de sí o no a todo el grupo. Todos responden sobre su propio personaje.</p><button id="pkb" class="btn gh pkb" style="max-width:300px">👁️ Mantené para ver tu carta</button><p class="mu">En juego: ${S.alive.length}</p></div><div class="grid"><button class="btn gh" onclick="wpass()">⏩ PASAR TURNO</button><button class="btn gold" onclick="Fx.jackpot();Native.haptic.tap();go('wtarget')">🎯 ARRIESGAR</button></div>`;
+const pk=document.getElementById('pkb'),pv=document.getElementById('peek');
+const on=e=>{e.preventDefault();Fx.paper();pv.innerHTML=cardHTML(c,ct(c));pv.hidden=false},off=()=>{pv.hidden=true;pv.innerHTML=''};
+pk.onpointerdown=on;pk.onpointerup=off;pk.onpointerleave=off;pk.onpointercancel=off;pk.oncontextmenu=e=>e.preventDefault()},
+wtarget(){
+$.innerHTML=`${hdr('Turno de '+pn(S.cur))}<h2>🎯 ¿De quién es el personaje?</h2><p class="mu">Elegí al jugador cuyo personaje querés adivinar.</p><div class="plist">${S.alive.filter(i=>i!==S.cur).map(i=>`<button class="tile" style="justify-content:center;padding:18px 8px" onclick="wtgt(${i})"><b>${pn(i)}</b></button>`).join('')}</div><div style="flex:1"></div><button class="btn gh" onclick="go('wturn')">Cancelar</button>`},
+wguess(){
+$.innerHTML=`${hdr('Turno de '+pn(S.cur))}<h2>🎯 ¿Quién es el personaje de ${pn(S.target)}?</h2><input id="q" class="sch" type="search" placeholder="Buscar personaje…" oninput="wfilter(this.value)" aria-label="Buscar personaje" autocomplete="off"><div id="lst" class="lst"></div><button class="btn gh" onclick="go('wturn')">Cancelar</button>`;wfilter('')},
+wresolve(){
+const t=S.target;
+$.innerHTML=`<div class="center"><div style="font-size:76px" class="pop">${S.hit?'🎯':'❌'}</div><h2>${S.hit?'¡Descubierto!':'¡No es '+esc(S.guess)+'!'}</h2><p class="mu">${S.hit?`${pn(t)} era <b>${esc(S.assign[t][0])}</b> y queda eliminado.`:`${pn(t)} sigue en juego. Se pasa el turno.`}</p><p class="mu">En juego: <b style="color:var(--li)">${S.alive.map(pn).join(', ')}</b></p></div><button class="btn" onclick="wnextTurn()">Continuar</button>`},
+wresult(){
+const w=S.alive[0];
+$.innerHTML=`<div class="center" style="justify-content:flex-start"><div style="font-size:64px" class="pop">🏆</div><h2>¡Ganó ${pn(w)}!</h2><p class="mu">Fue el último en pie · era ${esc(S.assign[w][0])}</p><ul class="olist" style="width:100%;text-align:left">${S.out.map(([t,by],j)=>`<li><b>${j+1}°</b><span>${pn(t)}<br><small style="color:var(--mu);font-weight:500">${esc(S.assign[t][0])} · descubierto por ${pn(by)}</small></span></li>`).join('')}</ul></div><button class="btn" onclick="start()">Jugar de nuevo</button><button class="btn gh" onclick="go('home')">Menú principal</button>`},
+
+/* --- Ronda Relámpago --- */
+rready(){
+const g=S.pl[S.turn],d=S.pl[1-S.turn],L={f:'Fácil · con pistas de apoyo',m:'Medio · clásico',t:'Difícil / Tabú · con palabras prohibidas'};
+$.innerHTML=`${hdr('Turno '+(S.turn+1)+' de 2')}<div class="center"><div style="font-size:64px" class="pop">⏱️</div><h2>${pn(g)} adivina</h2><p class="mu" style="max-width:310px">${pn(g)}: sostené el celular en la frente, en horizontal, mirando a ${pn(d)}.<br>${pn(d)}: describí el personaje sin decir su nombre${S.diff=='t'?' ni las palabras prohibidas':''}.</p><p class="mu">Inclinar hacia abajo 🟢 acertó · hacia arriba 🔴 pasar</p><p class="mu">${L[S.diff]} · ${REL_SECS} s</p></div><button class="btn" onclick="rbegin()">¡Empezar!</button>`},
+rplay(){
+$.innerHTML=`<div id="rt"><div class="rh"><button class="rx" onclick="showQuit()" aria-label="Abandonar partida">←</button><span class="pill" id="rsc">⭐ ${S.pts}</span><span class="pill" id="rtm">${S.t}</span></div><button class="rb no" onclick="rhit(0)">🔴<br>PASAR</button><div class="rc" id="rc">${rcard(S.deck[S.k])}</div><button class="rb ok" onclick="rhit(1)">🟢<br>ACERTÓ</button></div>`;fit()},
+rend(){
+const last=S.turn==1;
+$.innerHTML=`<div class="center"><div style="font-size:70px" class="pop">⏰</div><h2>¡Se acabó el tiempo!</h2><p class="mu">${pn(S.pl[S.turn])} acertó</p><div class="score pop">${S.pts}</div></div><button class="btn" onclick="${last?"go('rresult')":"S.turn=1;go('rready')"}">${last?'Ver resultados':'Siguiente turno'}</button>`},
+rresult(){
+const[a,b]=S.scores,w=a==b?null:(a>b?0:1);
+$.innerHTML=`<div class="center"><div style="font-size:70px" class="pop">${w===null?'🤝':'🏆'}</div><h2>${w===null?'¡Empate!':'¡Ganó '+pn(S.pl[w])+'!'}</h2><ul class="olist" style="width:100%;text-align:left">${[0,1].map(i=>`<li><b>${S.scores[i]}</b><span>${pn(S.pl[i])}</span></li>`).join('')}</ul></div><button class="btn" onclick="start()">Revancha</button><button class="btn gh" onclick="go('home')">Menú principal</button>`}
+};
+
+/* ===== Acciones ===== */
+function saveCfg(){store.set('cfg',cfg)}
+function setNi(n){if(n==2&&S.names.length<5)return;S.ni=n;cfg={...cfg,ni:n};saveCfg();go('gsetup')}
+function setDiff(v){S.diff=v;cfg={...cfg,diff:v};saveCfg();go('rsetup')}
+function toggleCat(k){const i=S.cats.indexOf(k);if(i>=0)S.cats.splice(i,1);else S.cats.push(k);cfg={...cfg,cats:[...S.cats]};saveCfg();keepY(()=>go('cats'))}
+function showHow(){const m=document.getElementById('how');m.hidden=false;const b=document.getElementById('howok');if(b&&b.focus)b.focus()}
+function hideHow(){document.getElementById('how').hidden=true}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')hideHow()});
+
+
+
+function showQuit(){document.getElementById('quit').hidden=false;const b=document.getElementById('quitno');if(b&&b.focus)b.focus()}
+function hideQuit(){document.getElementById('quit').hidden=true}
+function quitGame(){hideQuit();clearT();Fx.hum(false);['vt','char','i','alive','imps','hints','off','voted','wasImp','win','assign','cur','wi','opts','target','hit','guess','out','pl','deck','k','pts','t','turn','scores','armed'].forEach(k=>delete S[k]);S.mode=null;go('home')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')hideQuit()});
+document.getElementById('exit').onclick=showQuit;
+document.getElementById('help').onclick=showHow;
+function addName(){if(S.names.length<10){S.names.push('');go('names')}}
+function delName(i){if(S.names.length>2){S.names.splice(i,1);go('names')}}
+function saveNames(){S.names=S.names.map(n=>(n||'').trim());store.set('names',S.names);go('home')}
+function start(){
+if(!S.cats.length)return;
+const pool=shuf(S.cats.flatMap(k=>CATS[k].p)),n=S.names.length;
+if(S.mode=='imp'){
+if(n<3)return;
+S.char=pool[0];S.i=Math.floor(Math.random()*n);S.dj=0;S.alive=[...Array(n).keys()];S.imps=shuf(S.alive).slice(0,S.ni);S.hints={};const tr=shuf(S.char[3]);S.imps.forEach((p,k)=>{S.hints[p]=tr[k%tr.length]});S.off=Math.floor(Math.random()*n);go('gpass')}
+else if(S.mode=='who'){S.assign=S.names.map((_,i)=>pool[i]);S.alive=[...Array(n).keys()];S.out=[];S.wi=Math.floor(Math.random()*n);S.wj=0;S.opts=S.cats.flatMap(k=>CATS[k].p).sort((a,b)=>a[0].localeCompare(b[0],'es'));go('wdeal')}
+else{if(S.dA==S.dB)S.dB=(S.dA+1)%n;S.pl=Math.random()<.5?[S.dA,S.dB]:[S.dB,S.dA];let rp=S.cats.flatMap(k=>CATS[k].p);if(TIER_FILTER){const f=rp.filter(c=>c[7]==TIER_OF[S.diff]);if(f.length>=8)rp=f}S.deck=shuf(rp);S.k=0;S.turn=0;S.scores=[0,0];go('rready')}}
+function gvoted(i){Fx.gavel();Native.haptic.tap();
+S.voted=i;S.wasImp=S.imps.includes(i);S.alive=S.alive.filter(x=>x!==i);
+const ai=S.imps.filter(x=>S.alive.includes(x)).length,inn=S.alive.length-ai;
+if(ai==0){S.win='group';bump();go('gresult')}
+else if(ai>=inn){S.win='imp';bump();go('gresult')}
+else go('gelim')}
+/* ¿Quién Soy? */
+const nextAlive=p=>{const a=S.alive,i=a.indexOf(p);return a[(i+1)%a.length]};
+function wpass(){S.cur=nextAlive(S.cur);go('wturn')}
+function wtgt(i){S.target=i;go('wguess')}
+function wfilter(q){
+const k=norm(q.trim()),box=document.getElementById('lst');if(!box)return;
+const r=S.opts.map((c,i)=>[c,i]).filter(x=>norm(x[0][0]).includes(k));
+box.innerHTML=r.length?r.map(x=>`<button class="tile" onclick="wpick(${x[1]})"><div><b>${esc(x[0][0])}</b><span class="s">${esc(ct(x[0]).n)}</span></div></button>`).join(''):'<p class="mu" style="text-align:center">Sin resultados</p>'}
+function wpick(i){
+const g=S.opts[i],t=S.target;S.hit=g===S.assign[t];S.guess=g[0];
+if(S.hit){S.alive=S.alive.filter(x=>x!==t);S.out.push([t,S.cur])}
+if(S.hit){Fx.win();Native.haptic.pattern('win')}else{Fx.fail();Native.haptic.pattern('fail')}go('wresolve')}
+function wnextTurn(){if(S.alive.length<=1){bump();go('wresult')}else{S.cur=nextAlive(S.cur);go('wturn')}}
+/* Ronda Relámpago */
+function rcard(c){
+const v=S.diff;
+return `<div id="rname">${esc(c[0])}</div><div class="rref">${esc(c[6])}</div>${v=='f'?`<ul class="rp">${c[2].map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:v=='t'?`<p class="rtl">🚫 Palabras prohibidas</p><ul class="rtb">${c[4].map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}`}
+function fit(){
+const rt=document.getElementById('rt'),nm=document.getElementById('rname');
+if(!rt||!nm||!rt.offsetWidth)return;
+const W=rt.offsetWidth*.56,H=rt.offsetHeight,txt=nm.textContent,L=Math.max(...txt.split(' ').map(w=>w.length));
+nm.style.fontSize=Math.max(28,Math.min(H*(S.diff=='m'?.34:.22),W/(L*.62)))+'px'}
+if(window.addEventListener)window.addEventListener('resize',()=>{if(S.screen==='rplay')fit()});
+function onTilt(z){
+if(S.screen!=='rplay')return;
+if(S.armed===false){if(Math.abs(z)<3)S.armed=true;return}
+if(z<-6){S.armed=false;rhit(1)}else if(z>6){S.armed=false;rhit(0)}}
+function stopRel(){
+if(!S.relOn)return;S.relOn=false;
+Native.motion.stop();Native.orient('portrait')}
+async function rbegin(){
+S.relOn=true;S.armed=true;
+S.motion=await Native.motion.start(onTilt);
+await Native.orient('landscape');
+S.pts=0;S.t=REL_SECS;S.k=S.k||0;
+go('rplay');
+T=setInterval(()=>{if(S.screen!=='rplay'){clearT();return}S.t--;tension=1-S.t/REL_SECS;
+const tm=document.getElementById('rtm');if(tm){tm.textContent=S.t;if(S.t<=10){tm.style.color='#FF5C7A';if(S.t>0)sfx(S.t<=5?880:660,.08)}}
+if(S.t<=0){sfx(880,.4);S.scores[S.turn]=S.pts;if(S.turn==1)bump();go('rend')}},1000)}
+function rhit(ok){
+if(S.screen!=='rplay')return;
+if(ok){S.pts++;Fx.ding()}else Fx.whoosh();Native.haptic.tilt();
+S.k++;if(S.k>=S.deck.length){S.deck=shuf(S.deck);S.k=0}
+const rc=document.getElementById('rc'),sc=document.getElementById('rsc'),rt=document.getElementById('rt');
+if(rc)rc.innerHTML=rcard(S.deck[S.k]);if(sc)sc.textContent='⭐ '+S.pts;
+if(rt&&rt.classList){rt.classList.remove('fok','fno');void rt.offsetWidth;rt.classList.add(ok?'fok':'fno')}
+fit()}
+function holdFx(on){
+if(S.mode=='imp'){Fx.hum(on);Native.haptic.hold(on)}else if(S.mode=='who'&&on)Fx.paper()}
+Native.init();
+go('home');
+</script>
+</body>
+</html>
