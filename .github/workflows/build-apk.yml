@@ -22,11 +22,9 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Install Capacitor and Build
+      - name: Install Dependencies and Sync
         run: |
-          npm init -y
-          npm install @capacitor/core @capacitor/cli @capacitor/android
-          npx cap init "¿Qué Hacemos?" com.nicogomez.quehacemos --web-dir www
+          npm install
           npx cap add android
           npx cap sync android
 
