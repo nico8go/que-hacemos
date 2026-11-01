@@ -40,9 +40,3 @@ jobs:
         with:
           name: app-debug
           path: que-hacemos/android/app/build/outputs/apk/debug/app-debug.apk
-
-      - name: Upload APK Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: app-debug
-          path: android/app/build/outputs/apk/debug/app-debug.apk
